@@ -1,4 +1,5 @@
 name: Check PDF Page Count
+description: This action checks if a pdf exceeds 1 page.
 
 on:
   push:
@@ -19,7 +20,7 @@ jobs:
     - name: Count PDF Pages
       id: page_count
       run: |
-        echo "::set-output name=stdout::$(pdfinfo Emre-Gecit-CV.pdf | grep "Pages:" | awk '{print $2}')"
+        echo "::set-output name=stdout::$(pdfinfo resume.pdf | grep "Pages:" | awk '{print $2}')"
 
     - name: Fail if Page Count is not 1
       run: |
