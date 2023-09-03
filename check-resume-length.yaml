@@ -1,3 +1,0 @@
-
-- name: Check resume length
-  uses: gecitemre/check-resume-length@v1
