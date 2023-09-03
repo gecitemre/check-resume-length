@@ -1,11 +1,6 @@
 name: Check PDF Page Count
 description: This action checks if a pdf exceeds 1 page.
 
-on:
-  push:
-    branches:
-      - freie  # Adjust as needed
-
 jobs:
   check_pdf:
     runs-on: ubuntu-latest
