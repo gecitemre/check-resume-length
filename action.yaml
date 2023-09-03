@@ -1,0 +1,29 @@
+name: Check PDF Page Count
+
+on:
+  push:
+    branches:
+      - freie  # Adjust as needed
+
+jobs:
+  check_pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3.6.0
+
+    - name: Install pdfinfo
+      run: sudo apt-get install poppler-utils
+
+    - name: Count PDF Pages
+      id: page_count
+      run: |
+        echo "::set-output name=stdout::$(pdfinfo Emre-Gecit-CV.pdf | grep "Pages:" | awk '{print $2}')"
+
+    - name: Fail if Page Count is not 1
+      run: |
+        if [ ${{ steps.page_count.outputs.stdout }} -ne 1 ]; then
+          echo "PDF has ${{ steps.page_count.outputs.stdout }} pages, but should have 1"
+          exit 1
+        fi
